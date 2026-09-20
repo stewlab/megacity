@@ -22,6 +22,50 @@ mod record_replay;
 #[cfg(target_arch = "wasm32")]
 mod web_replay;
 
+/// Point Bevy at the crate's `assets/` directory when its default resolution
+/// would fail on native.
+///
+/// Bevy picks the asset root from `BEVY_ASSET_ROOT`, then `CARGO_MANIFEST_DIR`
+/// (set by `cargo run`), then the executable's directory. Launching the binary
+/// directly (`./target/release/app`) leaves only the exe dir, where there is no
+/// `assets/` folder, so every model load fails and the loading gate never
+/// finishes. In that case, walk up from the exe to a dev checkout's
+/// `crates/app/assets` and export `BEVY_ASSET_ROOT` before the asset server
+/// is built.
+#[cfg(not(target_arch = "wasm32"))]
+fn locate_asset_root() {
+    use std::path::{Path, PathBuf};
+
+    if std::env::var_os("BEVY_ASSET_ROOT").is_some() {
+        return;
+    }
+    let has_assets = |base: &PathBuf| base.join("assets").is_dir();
+    if let Some(dir) = std::env::var_os("CARGO_MANIFEST_DIR") {
+        if has_assets(&PathBuf::from(dir)) {
+            return; // `cargo run`: Bevy's default already resolves correctly.
+        }
+    }
+    let exe_dir = match std::env::current_exe()
+        .ok()
+        .and_then(|exe| exe.parent().map(Path::to_path_buf))
+    {
+        Some(dir) => dir,
+        None => return,
+    };
+    if has_assets(&exe_dir) {
+        return; // Packaged layout: assets shipped next to the binary.
+    }
+    for ancestor in exe_dir.ancestors().skip(1) {
+        let candidate = ancestor.join("crates/app");
+        if candidate.join("assets").is_dir() {
+            // Bevy appends its asset folder name to this root, so it must
+            // point at the directory *containing* `assets/`.
+            std::env::set_var("BEVY_ASSET_ROOT", candidate);
+            return;
+        }
+    }
+}
+
 fn main() {
     // -- CLI argument parsing -------------------------------------------------
     let args: Vec<String> = std::env::args().collect();
@@ -65,6 +109,9 @@ fn main() {
     let record_mode = replay_mode && record_dir.is_some();
     #[cfg(target_arch = "wasm32")]
     let record_mode = false;
+
+    #[cfg(not(target_arch = "wasm32"))]
+    locate_asset_root();
 
     let mut app = App::new();
 
@@ -306,6 +353,25 @@ fn main() {
             ],
         });
         app.add_systems(Update, drive_screenshots);
+    }
+
+    // Debug: `--autostart` skips the main menu and immediately begins a new
+    // city (used to reproduce the paused-after-new-game state headlessly).
+    #[cfg(not(target_arch = "wasm32"))]
+    if args.iter().any(|a| a == "--autostart") {
+        app.insert_resource(simulation::new_game_config::NewGameConfig {
+            city_name: "Debug City".to_string(),
+            seed: 20260920,
+        });
+        app.add_systems(
+            Startup,
+            |mut new_games: EventWriter<save::NewGameEvent>,
+             mut next: ResMut<NextState<simulation::app_state::AppState>>| {
+                new_games.send(save::NewGameEvent);
+                next.set(simulation::app_state::AppState::Playing);
+                println!("[autostart] NewGameEvent sent, AppState -> Playing");
+            },
+        );
     }
 
     app.run();
