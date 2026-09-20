@@ -116,7 +116,7 @@ pub(crate) fn draw_service_radar(ui: &mut egui::Ui, chart: &ChartHistory) {
         for pair in ring_points.windows(2) {
             painter.line_segment(
                 [pair[0], pair[1]],
-                egui::Stroke::new(0.5, egui::Color32::from_gray(60)),
+                egui::Stroke::new(0.5_f32, egui::Color32::from_gray(60)),
             );
         }
     }
@@ -130,7 +130,7 @@ pub(crate) fn draw_service_radar(ui: &mut egui::Ui, chart: &ChartHistory) {
         );
         painter.line_segment(
             [center, end],
-            egui::Stroke::new(0.5, egui::Color32::from_gray(60)),
+            egui::Stroke::new(0.5_f32, egui::Color32::from_gray(60)),
         );
 
         let label_r = radius + 14.0;
@@ -172,7 +172,7 @@ pub(crate) fn draw_service_radar(ui: &mut egui::Ui, chart: &ChartHistory) {
     for pair in outline_points.windows(2) {
         painter.line_segment(
             [pair[0], pair[1]],
-            egui::Stroke::new(2.0, egui::Color32::from_rgb(80, 180, 255)),
+            egui::Stroke::new(2.0_f32, egui::Color32::from_rgb(80, 180, 255)),
         );
     }
 

@@ -392,6 +392,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
 
 [[package]]
+name = "automod_dir"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "av-scenechange"
 version = "0.14.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3412,6 +3421,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "lz4_flex"
+version = "0.11.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "373f5eceeeab7925e0c1098212f2fbc4d416adec9d35051a6ab251e824c1854a"
+dependencies = [
+ "twox-hash 2.1.4",
+]
+
+[[package]]
 name = "mach2"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3459,9 +3477,13 @@ dependencies = [
  "getrandom 0.4.1",
  "rendering",
  "save",
+ "serde_json",
  "simulation",
  "ui",
  "uuid",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
 ]
 
 [[package]]
@@ -4695,7 +4717,9 @@ checksum = "19b30a45b0cd0bcca8037f3d0dc3421eaf95327a17cad11964fb8179b4fc4832"
 name = "rendering"
 version = "0.1.0"
 dependencies = [
+ "automod_dir",
  "bevy",
+ "bevy_egui",
  "simulation",
 ]
 
@@ -4801,7 +4825,7 @@ version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fad02996bfc73da3e301efe90b1837be9ed8f4a462b6ed410aa35d00381de89f"
 dependencies = [
- "twox-hash",
+ "twox-hash 1.6.3",
 ]
 
 [[package]]
@@ -4819,15 +4843,18 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bitcode",
+ "criterion",
  "flate2",
  "futures-channel",
  "js-sys",
+ "lz4_flex",
  "rendering",
  "serde",
  "simulation",
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-sys",
+ "xxhash-rust",
 ]
 
 [[package]]
@@ -4950,6 +4977,7 @@ dependencies = [
 name = "simulation"
 version = "0.1.0"
 dependencies = [
+ "automod_dir",
  "bevy",
  "bitcode",
  "criterion",
@@ -4957,6 +4985,7 @@ dependencies = [
  "futures-lite",
  "pathfinding",
  "rand 0.8.5",
+ "rand_chacha 0.3.1",
  "serde",
  "serde_json",
 ]
@@ -5440,6 +5469,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "twox-hash"
+version = "2.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5283634e518fe9e82c7b20520bb4bc209009fd16c82077c802f8111ecbb0117a"
+
+[[package]]
 name = "typeid"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5455,11 +5490,13 @@ checksum = "f8c1ae7cc0fdb8b842d65d127cb981574b0d2b249b74d1c7a2986863dc134f71"
 name = "ui"
 version = "0.1.0"
 dependencies = [
+ "automod_dir",
  "bevy",
  "bevy_egui",
  "rendering",
  "save",
  "simulation",
+ "web-sys",
 ]
 
 [[package]]
@@ -6691,6 +6728,12 @@ name = "xml-rs"
 version = "0.8.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3ae8337f8a065cfc972643663ea4279e04e7256de865aa66fe25cec5fb912d3f"
+
+[[package]]
+name = "xxhash-rust"
+version = "0.8.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aee1b19627c7c60102ab80d3a9cbe18de90bfe03bfa6c3715447681f0e8c8af6"
 
 [[package]]
 name = "y4m"

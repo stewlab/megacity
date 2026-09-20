@@ -84,7 +84,7 @@ fn main() {
                 } else {
                     Some(Window {
                         title: "MegaCity".to_string(),
-                        resolution: (1280.0, 720.0).into(),
+                        resolution: (1280.0_f32, 720.0_f32).into(),
                         present_mode: PresentMode::AutoVsync,
                         ..default()
                     })

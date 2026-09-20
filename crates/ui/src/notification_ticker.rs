@@ -173,7 +173,7 @@ pub fn notification_toast_ui(
             .show(ctx, |ui| {
                 egui::Frame::new()
                     .fill(bg)
-                    .stroke(egui::Stroke::new(1.0, color))
+                    .stroke(egui::Stroke::new(1.0_f32, color))
                     .corner_radius(egui::CornerRadius::same(4))
                     .inner_margin(egui::Margin::symmetric(8, 6))
                     .show(ui, |ui| {

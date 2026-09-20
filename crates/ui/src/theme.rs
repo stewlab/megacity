@@ -103,20 +103,20 @@ pub fn setup_megacity_theme(mut contexts: EguiContexts) {
     style.visuals.widgets.active.weak_bg_fill = WIDGET_ACTIVE;
 
     // Text colors per widget state
-    style.visuals.widgets.noninteractive.fg_stroke = egui::Stroke::new(1.0, TEXT);
-    style.visuals.widgets.inactive.fg_stroke = egui::Stroke::new(1.0, TEXT);
-    style.visuals.widgets.hovered.fg_stroke = egui::Stroke::new(1.0, TEXT_HEADING);
-    style.visuals.widgets.active.fg_stroke = egui::Stroke::new(1.0, TEXT_HEADING);
+    style.visuals.widgets.noninteractive.fg_stroke = egui::Stroke::new(1.0_f32, TEXT);
+    style.visuals.widgets.inactive.fg_stroke = egui::Stroke::new(1.0_f32, TEXT);
+    style.visuals.widgets.hovered.fg_stroke = egui::Stroke::new(1.0_f32, TEXT_HEADING);
+    style.visuals.widgets.active.fg_stroke = egui::Stroke::new(1.0_f32, TEXT_HEADING);
 
     // Border strokes
-    style.visuals.widgets.noninteractive.bg_stroke = egui::Stroke::new(1.0, BORDER);
-    style.visuals.widgets.inactive.bg_stroke = egui::Stroke::new(0.5, BORDER);
-    style.visuals.widgets.hovered.bg_stroke = egui::Stroke::new(1.0, PRIMARY);
-    style.visuals.widgets.active.bg_stroke = egui::Stroke::new(1.5, PRIMARY);
+    style.visuals.widgets.noninteractive.bg_stroke = egui::Stroke::new(1.0_f32, BORDER);
+    style.visuals.widgets.inactive.bg_stroke = egui::Stroke::new(0.5_f32, BORDER);
+    style.visuals.widgets.hovered.bg_stroke = egui::Stroke::new(1.0_f32, PRIMARY);
+    style.visuals.widgets.active.bg_stroke = egui::Stroke::new(1.5_f32, PRIMARY);
 
     // Selection
     style.visuals.selection.bg_fill = WIDGET_ACTIVE;
-    style.visuals.selection.stroke = egui::Stroke::new(1.0, PRIMARY);
+    style.visuals.selection.stroke = egui::Stroke::new(1.0_f32, PRIMARY);
 
     // Rounding
     let window_rounding = egui::CornerRadius::same(CORNER_RADIUS);
@@ -129,7 +129,7 @@ pub fn setup_megacity_theme(mut contexts: EguiContexts) {
     style.visuals.widgets.active.corner_radius = widget_rounding;
 
     // Window stroke
-    style.visuals.window_stroke = egui::Stroke::new(1.0, BORDER);
+    style.visuals.window_stroke = egui::Stroke::new(1.0_f32, BORDER);
 
     ctx.set_style(style);
 }

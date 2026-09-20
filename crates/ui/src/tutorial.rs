@@ -37,7 +37,7 @@ pub fn tutorial_ui(
         .corner_radius(egui::CornerRadius::same(12))
         .inner_margin(egui::Margin::same(16))
         .fill(egui::Color32::from_rgba_unmultiplied(25, 30, 45, 240))
-        .stroke(egui::Stroke::new(1.0, egui::Color32::from_rgb(60, 70, 100)));
+        .stroke(egui::Stroke::new(1.0_f32, egui::Color32::from_rgb(60, 70, 100)));
 
     egui::Window::new("Tutorial")
         .collapsible(false)

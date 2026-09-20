@@ -72,7 +72,7 @@ fn demand_bar(ui: &mut egui::Ui, label: &str, value: f32, color: egui::Color32) 
                 egui::pos2(bar_rect.min.x, mid_y),
                 egui::pos2(bar_rect.max.x, mid_y),
             ],
-            egui::Stroke::new(1.0, egui::Color32::from_gray(120)),
+            egui::Stroke::new(1.0_f32, egui::Color32::from_gray(120)),
         );
 
         // Filled portion
@@ -188,7 +188,7 @@ pub(crate) fn speed_button(
             painter.rect_stroke(
                 rect.shrink(1.0),
                 4.0,
-                egui::Stroke::new(1.0, dim_color(color, 0.5)),
+                egui::Stroke::new(1.0_f32, dim_color(color, 0.5)),
                 egui::StrokeKind::Inside,
             );
         } else if response.hovered() {
@@ -203,7 +203,7 @@ pub(crate) fn speed_button(
             painter.circle_stroke(
                 dot_center,
                 dot_radius,
-                egui::Stroke::new(1.0, dim_color(color, 0.4)),
+                egui::Stroke::new(1.0_f32, dim_color(color, 0.4)),
             );
         }
 

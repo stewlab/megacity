@@ -1,4 +1,3 @@
-use bevy::prelude::*;
 use bevy_egui::EguiPlugin;
 
 use crate::*;

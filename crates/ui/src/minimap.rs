@@ -240,7 +240,7 @@ fn draw_viewport_rect(
     painter.rect_stroke(
         viewport_rect,
         0.0,
-        egui::Stroke::new(1.5, COLOR_VIEWPORT),
+        egui::Stroke::new(1.5_f32, COLOR_VIEWPORT),
         egui::StrokeKind::Outside,
     );
 }

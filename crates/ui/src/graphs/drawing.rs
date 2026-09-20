@@ -36,7 +36,7 @@ pub(crate) fn draw_sparkline(ui: &mut egui::Ui, data: &[f32], color: egui::Color
         .collect();
 
     for window in points.windows(2) {
-        painter.line_segment([window[0], window[1]], egui::Stroke::new(1.5, color));
+        painter.line_segment([window[0], window[1]], egui::Stroke::new(1.5_f32, color));
     }
 }
 
@@ -72,7 +72,7 @@ pub(crate) fn draw_multi_line_chart(
         let y = rect.min.y + (i as f32 / 4.0) * rect.height();
         painter.line_segment(
             [egui::pos2(rect.min.x, y), egui::pos2(rect.max.x, y)],
-            egui::Stroke::new(0.3, egui::Color32::from_gray(50)),
+            egui::Stroke::new(0.3_f32, egui::Color32::from_gray(50)),
         );
     }
 
@@ -92,7 +92,7 @@ pub(crate) fn draw_multi_line_chart(
             .collect();
 
         for window in points.windows(2) {
-            painter.line_segment([window[0], window[1]], egui::Stroke::new(1.5, *color));
+            painter.line_segment([window[0], window[1]], egui::Stroke::new(1.5_f32, *color));
         }
     }
 }
@@ -155,7 +155,7 @@ pub(crate) fn draw_stacked_area(
         painter.add(egui::Shape::convex_polygon(
             polygon,
             fill,
-            egui::Stroke::new(1.0, *color),
+            egui::Stroke::new(1.0_f32, *color),
         ));
     }
 }

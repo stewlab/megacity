@@ -250,6 +250,6 @@ fn draw_line(
         .collect();
 
     for window in points.windows(2) {
-        painter.line_segment([window[0], window[1]], egui::Stroke::new(1.5, color));
+        painter.line_segment([window[0], window[1]], egui::Stroke::new(1.5_f32, color));
     }
 }
